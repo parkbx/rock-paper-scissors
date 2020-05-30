@@ -6,15 +6,35 @@
     <title>Rock Paper Scissors</title>
     <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="main.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="div-btn-container">
-        <button class="btn">ROCK</button>
-        <button class="btn">PAPER</button>
-        <button class="btn">SCISSORS</button>
+    <div class="div-content-container">
+        <div class="div-result-container">
+            <h1>Click Start Button to start!</h1>
+        </div>
+        <div class="div-userBtn-container">
+            <h2>YOU</h2>
+            <button class="btn-user">ROCK</button>
+            <button class="btn-user">PAPER</button>
+            <button class="btn-user">SCISSORS</button>
+        </div>
+        <div class="div-score-container">
+            <p><span class="span-userScore">0</span> VS <span class="span-compScore">0</span></p>
+        </div>
+        <div class="div-compSelection-container">
+            <h2>A.I.</h2>
+            <button class="btn-comp">ROCK</button>
+            <button class="btn-comp">PAPER</button>
+            <button class="btn-comp">SCISSORS</button>
+        </div>
+        <div class="div-startResetBtn-container">
+            
+            <button class="btn-start">START</button>
+        </div>
     </div>
     
+
     <script src="app.js"></script>
 </body>
 </html>
