@@ -4,6 +4,81 @@ body {
     color: #fff3cd;
 }
 
+h1 {
+    font-size: 3rem;
+}
+
+h2, p {
+    font-size: 1.5rem;
+}
+
+
+/* GENERAL BUTTON CSS SECTION  */
 button {
     background-color: #ffc38b;
+    outline: 0;
+}
+
+.btn-disabled {
+    background-color: #363636;
+}
+
+.btn-selected {
+    transform: scale(1.1);
+    border-color: #ffc600;
+    box-shadow: 0 0 1rem #ffc600;
+}
+
+/* GAME STATUS SECTION  */
+.div-result-container {
+    margin: 0 auto;
+    padding: 30px 0;
+    text-align: center;
+}
+
+/* GAME FIELD SECTION  */
+.div-playField-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-userBtn-container, .div-score-container, .div-compSelection-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0 50px;
+    text-align: center;
+}
+
+
+/* PLAYER BUTTON SECTION  */
+.div-userBtn-container h2 {
+    margin: 20px 0;
+}
+
+.div-userBtn-container button {
+    margin: 10px 0;
+}
+
+/* SCORE SECTION  */
+.div-score-container p {
+    margin: auto 0;
+}
+
+/* PLAYER BUTTON SECTION  */
+.div-compSelection-container h2 {
+    margin: 20px 0;
+}
+
+.div-compSelection-container button {
+    margin: 10px 0;
+}
+
+/* START BUTTON SECTION  */
+.div-startResetBtn-container {
+    text-align: center;
+}
+
+.btn-start {
+    height: 50px;
+    width: 300px;
 }

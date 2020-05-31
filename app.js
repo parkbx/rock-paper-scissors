@@ -5,126 +5,148 @@ let playCounter = 0; // Play counter.
 let playerScore = 0; // Player score.
 let computerScore = 0; // Computer score
 
-// Start game when START button is clicked. Rock, Paper, and Scissors buttons are enabled.
-startBtn.addEventListener("click", () => {
-  document.querySelector(".status").textContent =
-    "Choose Rock, Paper, or Scissors.";
-
-  buttons.forEach((btn) => (btn.disabled = false));
-
-  playerScore = 0; // Reset player score.
-  computerScore = 0; // Reset computer score.
-
-  // Reset scores.
-  document.querySelector(".span-userScore").textContent = playerScore;
-  document.querySelector(".span-compScore").textContent = computerScore;
-});
+// Start game when START button is clicked.
+startBtn.addEventListener("click", resetGame);
 
 // Adding event listeners to all buttons and play one round of game when player makes selection.
 buttons.forEach((btn) => btn.addEventListener("click", playGame));
 
+// Function to start/reset the game.
+function resetGame() {
+    document.querySelector(".status").textContent =
+        "Choose Rock, Paper, or Scissors.";
+
+    buttons.forEach(enableBtns); // Enable user buttons.
+
+    playerScore = 0; // Reset player score.
+    computerScore = 0; // Reset computer score.
+
+    // Reset scores.
+    document.querySelector(".span-userScore").textContent = playerScore;
+    document.querySelector(".span-compScore").textContent = computerScore;
+}
+
+function enableBtns(btn) {
+    btn.disabled = false; // Rock, Paper, and Scissors buttons are enabled.
+    btn.classList.remove("btn-disabled"); // Remove btn-disabled CSS.
+}
+
+function disableBtns(btn) {
+    btn.disabled = true; // Rock, Paper, and Scissors buttons are disabled.
+    btn.classList.add("btn-disabled"); // Add btn-disabled CSS.
+}
+
 // Function to make computer selection.
 function computerPlay() {
-  let ranNumb = Math.floor(Math.random() * 3);
-  let computerChoice = "";
+    let ranNumb = Math.floor(Math.random() * 3);
+    let computerChoice = "";
 
-  if (ranNumb === 0) {
-    computerChoice = "ROCK";
-  } else if (ranNumb === 1) {
-    computerChoice = "PAPER";
-  } else {
-    computerChoice = "SCISSORS";
-  }
+    if (ranNumb === 0) {
+        computerChoice = "ROCK";
+    } else if (ranNumb === 1) {
+        computerChoice = "PAPER";
+    } else {
+        computerChoice = "SCISSORS";
+    }
 
-  return computerChoice;
+    return computerChoice;
 }
 
 // Function to determine the winner
 function playRound(playerSelection, computerSelection) {
-  let winner = "";
+    let winner = "";
 
-  if (playerSelection === "ROCK") {
-    switch (computerSelection) {
-      case "ROCK":
-        winner = "Draw";
-        break;
-      case "PAPER":
-        winner = "Computer";
-        break;
-      case "SCISSORS":
-        winner = "Player";
+    if (playerSelection === "ROCK") {
+        switch (computerSelection) {
+            case "ROCK":
+                winner = "Draw";
+                break;
+            case "PAPER":
+                winner = "Computer";
+                break;
+            case "SCISSORS":
+                winner = "Player";
+        }
+    } else if (playerSelection === "PAPER") {
+        switch (computerSelection) {
+            case "ROCK":
+                winner = "Player";
+                break;
+            case "PAPER":
+                winner = "Draw";
+                break;
+            case "SCISSORS":
+                winner = "Computer";
+        }
+    } else {
+        switch (computerSelection) {
+            case "ROCK":
+                winner = "Computer";
+                break;
+            case "PAPER":
+                winner = "Player";
+                break;
+            case "SCISSORS":
+                winner = "Draw";
+        }
     }
-  } else if (playerSelection === "PAPER") {
-    switch (computerSelection) {
-      case "ROCK":
-        winner = "Player";
-        break;
-      case "PAPER":
-        winner = "Draw";
-        break;
-      case "SCISSORS":
-        winner = "Computer";
-    }
-  } else {
-    switch (computerSelection) {
-      case "ROCK":
-        winner = "Computer";
-        break;
-      case "PAPER":
-        winner = "Player";
-        break;
-      case "SCISSORS":
-        winner = "Draw";
-    }
-  }
 
-  return winner;
+    return winner;
 }
 
 // Function to play the game.
 function playGame() {
-  if (playCounter === 5) return; // Stop if playCounter is 5.
-
-  startBtn.disabled = true; // Disable start button.
-
-  // Declare player selection and computer selection.
-  const playerSelection = this.value;
-  const computerSelection = computerPlay();
-
-  // Declare winner.
-  let winner = playRound(playerSelection, computerSelection);
-
-  // Determine the winner of the round.
-  if (winner === "Player") {
-    document.querySelector(".status").textContent = "You won this round!";
-    playerScore++;
-    document.querySelector(".span-userScore").textContent = playerScore;
-  } else if (winner === "Computer") {
-    document.querySelector(".status").textContent = "You lost this round =(";
-    computerScore++;
-    document.querySelector(".span-compScore").textContent = computerScore;
-  } else {
-    document.querySelector(".status").textContent = "It's a draw..";
-  }
-
-  playCounter++; // Increase play counter by 1.
-
-  if (playCounter === 5) {
-    startBtn.disabled = false; // If play counter is 5, enable START button.
-    buttons.forEach((btn) => (btn.disabled = true)); // Disable user buttons.
-
-    playCounter = 0; // Reset play counter.
-
-    // Reset status text.
-    if (playerScore > computerScore) {
-      document.querySelector(".status").textContent =
-        "Congratulation, you've won! Click START button for another round!";
-    } else if (playerScore < computerScore) {
-      document.querySelector(".status").textContent =
-        "Sorry.. maybe next time =) Click START button for another round!";
-    } else {
-      document.querySelector(".status").textContent =
-        "Oh man... it's a draw. Try again! Click START button for another round!";
+    // Remove .btn-selected CSS.
+    if (playCounter > 0) {
+        buttons.forEach((btn) => btn.classList.remove("btn-selected"));
     }
-  }
+
+    if (playCounter === 5) return; // Stop if playCounter is 5.
+
+    startBtn.disabled = true; // Disable start button.
+
+    // Declare player selection and computer selection.
+    const playerSelection = this.value;
+    const computerSelection = computerPlay();
+
+    this.classList.add("btn-selected");
+
+    // Declare winner.
+    let winner = playRound(playerSelection, computerSelection);
+
+    // Determine the winner of the round.
+    if (winner === "Player") {
+        document.querySelector(".status").textContent = "You won this round!";
+        playerScore++;
+        document.querySelector(".span-userScore").textContent = playerScore;
+    } else if (winner === "Computer") {
+        document.querySelector(".status").textContent = "You lost this round =(";
+        computerScore++;
+        document.querySelector(".span-compScore").textContent = computerScore;
+    } else {
+        document.querySelector(".status").textContent = "It's a draw..";
+    }
+
+    playCounter++; // Increase play counter by 1.
+
+    // When player counts hits 5.
+    if (playCounter === 5) {
+        startBtn.disabled = false; // Enable START button.
+        buttons.forEach(disableBtns); // Disable user buttons.
+        buttons.forEach((btn) => btn.classList.remove("btn-selected"));// Remove .btn-selected CSS.
+
+        playCounter = 0; // Reset play counter.
+
+        // Reset status text.
+        if (playerScore > computerScore) {
+            document.querySelector(".status").textContent =
+                "Congratulation, you've won! Click START button for another round!";
+        } else if (playerScore < computerScore) {
+            document.querySelector(".status").textContent =
+                "Sorry.. maybe next time =) Click START button for another round!";
+        } else {
+            document.querySelector(".status").textContent =
+                "Oh man... it's a draw. Try again! Click START button for another round!";
+        }
+    }
 }
