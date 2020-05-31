@@ -36,6 +36,12 @@ function disableBtns(btn) {
     btn.classList.add("btn-disabled"); // Add btn-disabled CSS.
 }
 
+// function removeClass(selector, class) {
+//     // document.querySelector('.btn-comp-selected').classList.remove('btn-comp-selected');
+//     document.querySelector("." + selector).classList.remove('btn-comp-selected');
+
+// }
+
 // Function to make computer selection.
 function computerPlay() {
     let ranNumb = Math.floor(Math.random() * 3);
@@ -96,20 +102,31 @@ function playRound(playerSelection, computerSelection) {
 
 // Function to play the game.
 function playGame() {
-    // Remove .btn-selected CSS.
+    // Remove .btn-selected CSS for player button and .btn-comp-selected for computer button.
     if (playCounter > 0) {
         buttons.forEach((btn) => btn.classList.remove("btn-selected"));
+        document.querySelector('.btn-comp-selected').classList.remove('btn-comp-selected');
     }
 
     if (playCounter === 5) return; // Stop if playCounter is 5.
 
     startBtn.disabled = true; // Disable start button.
+    startBtn.classList.add('btn-disabled'); // Add disabled button CSS.
 
     // Declare player selection and computer selection.
     const playerSelection = this.value;
     const computerSelection = computerPlay();
 
-    this.classList.add("btn-selected"); // Add .btn-selected CSS.
+    this.classList.add("btn-selected"); // Add .btn-selected CSS for player button.
+
+    // Add .btn-comp-selected CSS for computer button.
+    if (computerSelection === "ROCK") {
+        document.querySelector('.comp-rock').classList.add('btn-comp-selected');
+    } else if (computerSelection === "PAPER") {
+        document.querySelector('.comp-paper').classList.add('btn-comp-selected');
+    } else {
+        document.querySelector('.comp-scissors').classList.add('btn-comp-selected');
+    }
 
     // Declare winner.
     let winner = playRound(playerSelection, computerSelection);
@@ -134,19 +151,22 @@ function playGame() {
         startBtn.disabled = false; // Enable START button.
         buttons.forEach(disableBtns); // Disable user buttons.
         buttons.forEach((btn) => btn.classList.remove("btn-selected"));// Remove .btn-selected CSS.
+        startBtn.classList.remove('btn-disabled'); // Remove disabled button CSS.
+        document.querySelector('.btn-comp-selected').classList.remove('btn-comp-selected'); // Remove .btn-comp-selected CSS from computer button.
+
 
         playCounter = 0; // Reset play counter.
 
         // Reset status text.
         if (playerScore > computerScore) {
             document.querySelector(".status").textContent =
-                "Congratulation, you've won! Click START button for another round!";
+                "Congrats, you won! Click START button for another round!";
         } else if (playerScore < computerScore) {
             document.querySelector(".status").textContent =
-                "Sorry.. maybe next time =) Click START button for another round!";
+                "Sorry.. maybe next time! Click START button for another round!";
         } else {
             document.querySelector(".status").textContent =
-                "Oh man... it's a draw. Try again! Click START button for another round!";
+                "It's a draw.. Click START button for another round!";
         }
     }
 }
