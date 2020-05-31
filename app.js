@@ -109,7 +109,7 @@ function playGame() {
     const playerSelection = this.value;
     const computerSelection = computerPlay();
 
-    this.classList.add("btn-selected");
+    this.classList.add("btn-selected"); // Add .btn-selected CSS.
 
     // Declare winner.
     let winner = playRound(playerSelection, computerSelection);
