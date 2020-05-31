@@ -12,7 +12,6 @@ h2, p {
     font-size: 1.5rem;
 }
 
-
 /* GENERAL BUTTON CSS SECTION  */
 button {
     background-color: #ffc38b;
@@ -25,7 +24,7 @@ button {
 
 .btn-selected {
     transform: scale(1.1);
-    border-color: #e8e4e1;  /* #ffc600 */
+    border-color: #e8e4e1;
     box-shadow: 0 0 1rem #e8e4e1;
 }
 
@@ -33,7 +32,7 @@ button {
     background-color: #ffc38b;
     outline: 0;
     transform: scale(1.1);
-    border-color: #e8e4e1;  /* #ffc600 */
+    border-color: #e8e4e1;
     box-shadow: 0 0 1rem #e8e4e1;
 }
 
@@ -56,7 +55,6 @@ button {
     padding: 0 50px;
     text-align: center;
 }
-
 
 /* PLAYER BUTTON SECTION  */
 .div-userBtn-container h2 {

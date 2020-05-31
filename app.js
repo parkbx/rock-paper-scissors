@@ -36,12 +36,6 @@ function disableBtns(btn) {
     btn.classList.add("btn-disabled"); // Add btn-disabled CSS.
 }
 
-// function removeClass(selector, class) {
-//     // document.querySelector('.btn-comp-selected').classList.remove('btn-comp-selected');
-//     document.querySelector("." + selector).classList.remove('btn-comp-selected');
-
-// }
-
 // Function to make computer selection.
 function computerPlay() {
     let ranNumb = Math.floor(Math.random() * 3);
